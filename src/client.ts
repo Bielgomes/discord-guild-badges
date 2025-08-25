@@ -5,4 +5,4 @@ export const client = new Client({
   intents: ['Guilds', 'GuildPresences'],
 })
 
-await client.login(env.TOKEN)
+client.login(env.TOKEN)
