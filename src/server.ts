@@ -6,9 +6,6 @@ app
     host: env.HOST,
     port: env.PORT,
   })
-  .then(() => {
-    app.log.info('🚀 HTTP server is running!')
-  })
   .catch(err => {
     app.log.error(err)
     process.exit(1)
