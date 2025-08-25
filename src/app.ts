@@ -2,7 +2,10 @@ import { type FastifyReply, type FastifyRequest, fastify } from 'fastify'
 import z, { ZodError } from 'zod'
 import { client } from './client.ts'
 import { makeCompactBadge, makeDefaultBadge } from './utils/badges.ts'
-import { getOnlineMembersCount } from './utils/functions.ts'
+import {
+  fetchImageAndTransformToBase64,
+  getOnlineMembersCount,
+} from './utils/functions.ts'
 
 export const app = fastify({
   logger: {
@@ -34,9 +37,18 @@ app.get(
       const guild = await client.guilds.fetch(guildId)
       const { guildOnlineMemberCount } = getOnlineMembersCount(guild)
 
+      const guildIconUrl =
+        guild.iconURL() || 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
+      const guildIconBase64 = await fetchImageAndTransformToBase64(guildIconUrl)
+
+      const guildBannerUrl =
+        guild.bannerURL() || 'https://i.imgur.com/WcIB4vh.jpeg'
+      const guildBannerBase64 =
+        await fetchImageAndTransformToBase64(guildBannerUrl)
+
       const { badge } = await makeDefaultBadge({
-        iconUrl: guild.iconURL(),
-        bannerUrl: guild.bannerURL(),
+        iconUrl: guildIconBase64,
+        bannerUrl: guildBannerBase64,
         guildName: guild.name,
         totalOnlineMembersCount: guildOnlineMemberCount,
         totalMembersCount: guild.memberCount,
@@ -72,8 +84,12 @@ app.get(
       const guild = await client.guilds.fetch(guildId)
       const { guildOnlineMemberCount } = getOnlineMembersCount(guild)
 
+      const guildIconUrl =
+        guild.iconURL() || 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
+      const guildIconBase64 = await fetchImageAndTransformToBase64(guildIconUrl)
+
       const { badge } = await makeCompactBadge({
-        iconUrl: guild.iconURL(),
+        iconUrl: guildIconBase64,
         guildName: guild.name,
         totalOnlineMembersCount: guildOnlineMemberCount,
         totalMembersCount: guild.memberCount,
