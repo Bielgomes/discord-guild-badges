@@ -1,7 +1,7 @@
 import { type FastifyReply, type FastifyRequest, fastify } from 'fastify'
 import z, { ZodError } from 'zod'
 import { client } from './client.ts'
-import { makeCompactBadge, makeDefaultBadge } from './utils/badges.ts'
+import { makeCompactCard, makeDefaultCard } from './utils/cards.ts'
 import {
   fetchImageAndTransformToBase64,
   getOnlineMembersCount,
@@ -22,16 +22,16 @@ export const app = fastify({
 app.get(
   '/api/:guildId',
   async (request: FastifyRequest, reply: FastifyReply) => {
-    const defaultBadgeParamsSchema = z.object({
+    const defaultCardParamsSchema = z.object({
       guildId: z.string(),
     })
 
-    const defaultBadgeQuerySchema = z.object({
+    const defaultCardQuerySchema = z.object({
       buttonMessage: z.string().optional(),
     })
 
-    const { guildId } = defaultBadgeParamsSchema.parse(request.params)
-    const { buttonMessage } = defaultBadgeQuerySchema.parse(request.query)
+    const { guildId } = defaultCardParamsSchema.parse(request.params)
+    const { buttonMessage } = defaultCardQuerySchema.parse(request.query)
 
     try {
       const guild = await client.guilds.fetch(guildId)
@@ -46,7 +46,7 @@ app.get(
       const guildBannerBase64 =
         await fetchImageAndTransformToBase64(guildBannerUrl)
 
-      const { badge } = await makeDefaultBadge({
+      const { card } = await makeDefaultCard({
         iconUrl: guildIconBase64,
         bannerUrl: guildBannerBase64,
         guildName: guild.name,
@@ -58,7 +58,7 @@ app.get(
       return reply
         .status(200)
         .header('content-type', 'image/svg+xml')
-        .send(badge)
+        .send(card)
     } catch {
       await reply.status(400).send()
     }
@@ -68,17 +68,17 @@ app.get(
 app.get(
   '/api/compact/:guildId',
   async (request: FastifyRequest, reply: FastifyReply) => {
-    const compactBadgeParamsSchema = z.object({
+    const compactCardParamsSchema = z.object({
       guildId: z.string(),
       buttonMessage: z.string().optional(),
     })
 
-    const compactBadgeQuerySchema = z.object({
+    const compactCardQuerySchema = z.object({
       buttonMessage: z.string().optional(),
     })
 
-    const { guildId } = compactBadgeParamsSchema.parse(request.params)
-    const { buttonMessage } = compactBadgeQuerySchema.parse(request.query)
+    const { guildId } = compactCardParamsSchema.parse(request.params)
+    const { buttonMessage } = compactCardQuerySchema.parse(request.query)
 
     try {
       const guild = await client.guilds.fetch(guildId)
@@ -88,7 +88,7 @@ app.get(
         guild.iconURL() || 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
       const guildIconBase64 = await fetchImageAndTransformToBase64(guildIconUrl)
 
-      const { badge } = await makeCompactBadge({
+      const { card } = await makeCompactCard({
         iconUrl: guildIconBase64,
         guildName: guild.name,
         totalOnlineMembersCount: guildOnlineMemberCount,
@@ -99,7 +99,7 @@ app.get(
       return reply
         .status(200)
         .header('content-type', 'image/svg+xml')
-        .send(badge)
+        .send(card)
     } catch {
       await reply.status(400).send()
     }

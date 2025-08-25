@@ -11,7 +11,7 @@ const fontImport = `
   </defs>
 `
 
-interface makeDefaultBadgeInput {
+interface makeDefaultCardInput {
   iconUrl: string | null
   bannerUrl: string | null
   guildName: string
@@ -20,14 +20,14 @@ interface makeDefaultBadgeInput {
   buttonMessage: string | undefined
 }
 
-export async function makeDefaultBadge({
+export async function makeDefaultCard({
   iconUrl,
   bannerUrl,
   guildName,
   totalOnlineMembersCount,
   totalMembersCount,
   buttonMessage = 'Join',
-}: makeDefaultBadgeInput) {
+}: makeDefaultCardInput) {
   const slicedGuildName =
     guildName.length > 23 ? `${guildName.slice(0, 23)}...` : guildName
   const slicedButtonMessage =
@@ -48,7 +48,7 @@ export async function makeDefaultBadge({
 
   const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
 
-  const badge = `
+  const card = `
     <svg width="342" height="189" fill="#141414" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
@@ -81,11 +81,11 @@ export async function makeDefaultBadge({
   `.trim()
 
   return {
-    badge,
+    card,
   }
 }
 
-interface makeCompactBadgeInput {
+interface makeCompactCardInput {
   iconUrl: string | null
   guildName: string
   totalOnlineMembersCount: number
@@ -93,13 +93,13 @@ interface makeCompactBadgeInput {
   buttonMessage: string | undefined
 }
 
-export async function makeCompactBadge({
+export async function makeCompactCard({
   iconUrl,
   guildName,
   totalOnlineMembersCount,
   totalMembersCount,
   buttonMessage = 'Join',
-}: makeCompactBadgeInput) {
+}: makeCompactCardInput) {
   const slicedGuildName =
     guildName.length > 22 ? `${guildName.slice(0, 22)}...` : guildName
   const slicedButtonMessage =
@@ -120,7 +120,7 @@ export async function makeCompactBadge({
 
   const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 90
 
-  const badge = `
+  const card = `
     <svg width="388" height="119" fill="#141414" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
@@ -149,6 +149,6 @@ export async function makeCompactBadge({
   `.trim()
 
   return {
-    badge,
+    card,
   }
 }
