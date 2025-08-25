@@ -1,9 +1,10 @@
 import { app } from './app.ts'
+import { env } from './env.ts'
 
 app
   .listen({
-    host: '0.0.0.0',
-    port: 3333,
+    host: env.HOST,
+    port: env.PORT,
   })
   .then(() => {
     app.log.info('🚀 HTTP server is running!')
