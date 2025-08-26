@@ -15,8 +15,8 @@ interface makeDefaultCardInput {
   iconUrl: string | null
   bannerUrl: string | null
   guildName: string
-  totalOnlineMembersCount: number
-  totalMembersCount: number
+  onlineMembersCount: number
+  membersCount: number
   buttonMessage: string | undefined
 }
 
@@ -24,8 +24,8 @@ export async function makeDefaultCard({
   iconUrl,
   bannerUrl,
   guildName,
-  totalOnlineMembersCount,
-  totalMembersCount,
+  onlineMembersCount,
+  membersCount,
   buttonMessage = 'Join',
 }: makeDefaultCardInput) {
   const slicedGuildName =
@@ -35,16 +35,14 @@ export async function makeDefaultCard({
       ? `${buttonMessage.slice(0, 40)}...`
       : buttonMessage
 
-  const formattedTotalOnlineMembersCount = numberFormatter.format(
-    totalOnlineMembersCount
-  )
-  const formattedTotalMembersCount = numberFormatter.format(totalMembersCount)
+  const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
+  const formattedMembersCount = numberFormatter.format(membersCount)
 
   const defaultPadding = 15
-  const totalOnlineMembersCountText = `${formattedTotalOnlineMembersCount} online`
+  const onlineMembersCountText = `${formattedOnlineMembersCount} online`
 
   const charWidth = 7
-  const totalOnlineMembersWidth = totalOnlineMembersCountText.length * charWidth
+  const totalOnlineMembersWidth = onlineMembersCountText.length * charWidth
 
   const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
 
@@ -69,10 +67,10 @@ export async function makeDefaultCard({
       <text x="15" y="106" font-weight="bold" font-size="20" fill="#FFFFFF" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#BCC0C0">
         <circle cx="20" cy="121" r="4" fill="#43A25A"/>
-        <text x="27" y="126" letter-spacing="-0.5">${totalOnlineMembersCountText}</text>
+        <text x="27" y="126" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
         <circle cx="${totalMembersStartX - 7}" cy="121" r="4" />
-        <text x="${totalMembersStartX}" y="126" letter-spacing="-0.5">${formattedTotalMembersCount} members</text>
+        <text x="${totalMembersStartX}" y="126" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <rect width="312" height="30" x="15" y="145" rx="6" ry="6" fill="#00863A" />
@@ -88,16 +86,16 @@ export async function makeDefaultCard({
 interface makeCompactCardInput {
   iconUrl: string | null
   guildName: string
-  totalOnlineMembersCount: number
-  totalMembersCount: number
+  onlineMembersCount: number
+  membersCount: number
   buttonMessage: string | undefined
 }
 
 export async function makeCompactCard({
   iconUrl,
   guildName,
-  totalOnlineMembersCount,
-  totalMembersCount,
+  onlineMembersCount,
+  membersCount,
   buttonMessage = 'Join',
 }: makeCompactCardInput) {
   const slicedGuildName =
@@ -107,18 +105,16 @@ export async function makeCompactCard({
       ? `${buttonMessage.slice(0, 47)}...`
       : buttonMessage
 
-  const formattedTotalOnlineMembersCount = numberFormatter.format(
-    totalOnlineMembersCount
-  )
-  const formattedTotalMembersCount = numberFormatter.format(totalMembersCount)
+  const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
+  const formattedMembersCount = numberFormatter.format(membersCount)
 
   const defaultPadding = 15
-  const totalOnlineMembersCountText = `${formattedTotalOnlineMembersCount} online`
+  const onlineMembersCountText = `${formattedOnlineMembersCount} online`
 
   const charWidth = 7
-  const totalOnlineMembersWidth = totalOnlineMembersCountText.length * charWidth
+  const onlineMembersWidth = onlineMembersCountText.length * charWidth
 
-  const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 90
+  const totalMembersStartX = defaultPadding + onlineMembersWidth + 90
 
   const card = `
     <svg width="388" height="119" fill="#141414" xmlns="http://www.w3.org/2000/svg">
@@ -135,10 +131,10 @@ export async function makeCompactCard({
       <text x="75" y="38" font-weight="bold" font-size="20" fill="#FFFFFF" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#BCC0C0">
         <circle cx="80" cy="52" r="4" fill="#43A25A"/>
-        <text x="87" y="57" letter-spacing="-0.5">${totalOnlineMembersCountText}</text>
+        <text x="87" y="57" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
         <circle cx="${totalMembersStartX - 7}" cy="52" r="4" />
-        <text x="${totalMembersStartX}" y="57" letter-spacing="-0.5">${formattedTotalMembersCount} members</text>
+        <text x="${totalMembersStartX}" y="57" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <g>
