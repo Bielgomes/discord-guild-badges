@@ -1,7 +1,8 @@
-import { makeDefaultCard } from '@/utils/cards.ts'
+import { makeCompactCard, makeDefaultCard } from '@/utils/cards.ts'
 import { fetchImageAndTransformToBase64 } from '@/utils/functions.ts'
 
 interface CreateCardInput {
+  mode: 'default' | 'compact'
   guildName: string
   guildIconUrl: string | null
   guildBannerUrl: string | null
@@ -11,6 +12,7 @@ interface CreateCardInput {
 }
 
 export async function createCard({
+  mode,
   guildName,
   guildIconUrl,
   guildBannerUrl,
@@ -21,6 +23,21 @@ export async function createCard({
   const guildIconBase64 = await fetchImageAndTransformToBase64(
     guildIconUrl || 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
   )
+
+  if (mode === 'compact') {
+    const { card } = await makeCompactCard({
+      iconUrl: guildIconBase64,
+      guildName: guildName,
+      onlineMembersCount: guildOnlineMemberCount,
+      membersCount: guildMemberCount,
+      buttonMessage,
+    })
+
+    return {
+      card,
+    }
+  }
+
   const guildBannerBase64 = await fetchImageAndTransformToBase64(
     guildBannerUrl || 'https://i.imgur.com/WcIB4vh.jpeg'
   )

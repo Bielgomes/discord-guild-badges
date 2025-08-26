@@ -16,17 +16,19 @@ export async function createCardRoute(
   })
 
   const createCardQuerySchema = z.object({
+    mode: z.enum(['default', 'compact']).default('default'),
     buttonMessage: z.string().optional(),
   })
 
   const { guildId } = createCardParamsSchema.parse(request.params)
-  const { buttonMessage } = createCardQuerySchema.parse(request.query)
+  const { mode, buttonMessage } = createCardQuerySchema.parse(request.query)
 
   try {
     const guild = await client.guilds.fetch(guildId)
     const guildOnlineMemberCount = getOnlineMembersCount(guild)
 
     const { card } = await createCard({
+      mode,
       guildName: guild.name,
       guildIconUrl: guild.iconURL(),
       guildBannerUrl: guild.bannerURL(),
