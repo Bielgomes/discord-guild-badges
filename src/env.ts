@@ -4,7 +4,7 @@ import z from 'zod'
 const envSchema = z.object({
   TOKEN: z.string(),
   HOST: z.string().default('0.0.0.0'),
-  PORT: z.coerce.number().default(3333)
+  PORT: z.coerce.number().default(3333),
 })
 
 const _env = envSchema.safeParse(process.env)
