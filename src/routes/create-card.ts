@@ -21,10 +21,12 @@ export async function createCardRoute(
 
   const createCardQuerySchema = z.object({
     mode: z.enum(['default', 'compact']).default('default'),
+
     textColor: colorSchema,
-    backgroundColor: colorSchema,
-    borderRadius: z.coerce.number().max(30).optional(),
     statsTextColor: colorSchema,
+    backgroundColor: colorSchema,
+    borderColor: colorSchema,
+    borderRadius: z.coerce.number().max(30).optional(),
 
     buttonColor: colorSchema,
     buttonText: z.string().optional(),

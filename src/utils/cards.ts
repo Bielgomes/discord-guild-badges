@@ -58,32 +58,33 @@ export async function makeCompactCard({
   const charWidth = 7
   const onlineMembersWidth = onlineMembersCountText.length * charWidth
 
-  const totalMembersStartX = defaultPadding + onlineMembersWidth + 90
+  const totalMembersStartX = defaultPadding + onlineMembersWidth + 92
 
   const card = `
-    <svg width="388" height="119" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
+    <svg width="388" height="121" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
         <clipPath id="iconClip">
-          <rect width="50" height="50" x="15" y="15" rx="10" ry="10" />
+          <rect width="50" height="50" x="17" y="17" rx="10" ry="10" />
         </clipPath>
       </defs>
       <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
 
-      <image width="50" height="50" x="15" y="15" clip-path="url(#iconClip)" href="${icon}" />
+      <rect width="54" height="54" x="15" y="15" rx="11" ry="11" fill="#${backgroundColor}" />
+      <image width="50" height="50" x="17" y="17" clip-path="url(#iconClip)" href="${icon}" />
 
-      <text x="75" y="38" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
+      <text x="77" y="40" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#${statsTextColor}">
-        <circle cx="80" cy="52" r="4" fill="#43A25A"/>
-        <text x="87" y="57" letter-spacing="-0.5">${onlineMembersCountText}</text>
+        <circle cx="82" cy="54" r="4" fill="#43A25A"/>
+        <text x="89" y="59" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
-        <circle cx="${totalMembersStartX - 7}" cy="52" r="4" fill="#BCC0C0" />
-        <text x="${totalMembersStartX}" y="57" letter-spacing="-0.5">${formattedMembersCount} members</text>
+        <circle cx="${totalMembersStartX - 7}" cy="54" r="4" fill="#BCC0C0" />
+        <text x="${totalMembersStartX}" y="59" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <g>
-        <rect width="358" height="30" x="15" y="79" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
-        <text width="358" height="30" x="195" y="94" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
+        <rect width="358" height="30" x="15" y="80" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
+        <text width="358" height="30" x="195" y="96" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
       </g>
     </svg>
   `.trim()
