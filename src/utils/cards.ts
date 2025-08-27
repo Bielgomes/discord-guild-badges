@@ -11,99 +11,43 @@ const fontImport = `
   </defs>
 `
 
-interface makeDefaultCardInput {
-  iconUrl: string | null
-  bannerUrl: string | null
+interface MakeCompactCardInput {
+  icon: string | null
   guildName: string
   onlineMembersCount: number
   membersCount: number
-  buttonMessage: string | undefined
-}
 
-export async function makeDefaultCard({
-  iconUrl,
-  bannerUrl,
-  guildName,
-  onlineMembersCount,
-  membersCount,
-  buttonMessage = 'Join',
-}: makeDefaultCardInput) {
-  const slicedGuildName =
-    guildName.length > 23 ? `${guildName.slice(0, 23)}...` : guildName
-  const slicedButtonMessage =
-    buttonMessage.length > 40
-      ? `${buttonMessage.slice(0, 40)}...`
-      : buttonMessage
+  textColor: string | undefined
+  backgroundColor: string | undefined
+  borderRadius: number | undefined
+  statsTextColor: string | undefined
 
-  const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
-  const formattedMembersCount = numberFormatter.format(membersCount)
-
-  const defaultPadding = 15
-  const onlineMembersCountText = `${formattedOnlineMembersCount} online`
-
-  const charWidth = 7
-  const totalOnlineMembersWidth = onlineMembersCountText.length * charWidth
-
-  const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
-
-  const card = `
-    <svg width="342" height="189" fill="#141414" xmlns="http://www.w3.org/2000/svg">
-      ${fontImport}
-      <defs>
-        <clipPath id="bannerClip">
-          <rect width="100%" height="60" x="0" y="0" rx="2" ry="2" />
-        </clipPath>
-        <clipPath id="iconClip">
-          <rect width="50" height="50" x="18" y="35" rx="10" ry="10" />
-        </clipPath>
-      </defs>
-      <rect width="100%" height="100%" rx="2" ry="2" />
-
-      <image width="100%" height="60" x="0" y="0" clip-path="url(#bannerClip)" preserveAspectRatio="xMidYMid slice" href="${bannerUrl}" />
-
-      <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#141414" />
-      <image width="50" height="50" x="18" y="35" clip-path="url(#iconClip)" href="${iconUrl}" />
-
-      <text x="15" y="106" font-weight="bold" font-size="20" fill="#FFFFFF" letter-spacing="-0.5">${slicedGuildName}</text>
-      <g fill="#BCC0C0">
-        <circle cx="20" cy="121" r="4" fill="#43A25A"/>
-        <text x="27" y="126" letter-spacing="-0.5">${onlineMembersCountText}</text>
-
-        <circle cx="${totalMembersStartX - 7}" cy="121" r="4" />
-        <text x="${totalMembersStartX}" y="126" letter-spacing="-0.5">${formattedMembersCount} members</text>
-      </g>
-
-      <rect width="312" height="30" x="15" y="145" rx="6" ry="6" fill="#00863A" />
-      <text width="312" height="30" x="171" y="160" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#FFFFFF">${slicedButtonMessage}</text>
-    </svg>
-  `.trim()
-
-  return {
-    card,
-  }
-}
-
-interface makeCompactCardInput {
-  iconUrl: string | null
-  guildName: string
-  onlineMembersCount: number
-  membersCount: number
-  buttonMessage: string | undefined
+  buttonColor: string | undefined
+  buttonText: string | undefined
+  buttonTextColor: string | undefined
+  buttonBorderRadius: number | undefined
 }
 
 export async function makeCompactCard({
-  iconUrl,
+  icon,
   guildName,
   onlineMembersCount,
   membersCount,
-  buttonMessage = 'Join',
-}: makeCompactCardInput) {
+
+  textColor = 'FFFFFF',
+  backgroundColor = '141414',
+  borderRadius = 4,
+  statsTextColor = 'BCC0C0',
+
+  buttonColor = '00863A',
+  buttonText = 'Join',
+  buttonTextColor = 'FFFFFF',
+  buttonBorderRadius = 6,
+}: MakeCompactCardInput) {
   const slicedGuildName =
     guildName.length > 22 ? `${guildName.slice(0, 22)}...` : guildName
-  const slicedButtonMessage =
-    buttonMessage.length > 47
-      ? `${buttonMessage.slice(0, 47)}...`
-      : buttonMessage
+  const slicedButtonText =
+    buttonText.length > 47 ? `${buttonText.slice(0, 47)}...` : buttonText
 
   const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
   const formattedMembersCount = numberFormatter.format(membersCount)
@@ -117,30 +61,105 @@ export async function makeCompactCard({
   const totalMembersStartX = defaultPadding + onlineMembersWidth + 90
 
   const card = `
-    <svg width="388" height="119" fill="#141414" xmlns="http://www.w3.org/2000/svg">
+    <svg width="388" height="119" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
         <clipPath id="iconClip">
           <rect width="50" height="50" x="15" y="15" rx="10" ry="10" />
         </clipPath>
       </defs>
-      <rect width="100%" height="100%" rx="2" ry="2" />
+      <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
 
-      <image width="50" height="50" x="15" y="15" clip-path="url(#iconClip)" href="${iconUrl}" />
+      <image width="50" height="50" x="15" y="15" clip-path="url(#iconClip)" href="${icon}" />
 
-      <text x="75" y="38" font-weight="bold" font-size="20" fill="#FFFFFF" letter-spacing="-0.5">${slicedGuildName}</text>
-      <g fill="#BCC0C0">
+      <text x="75" y="38" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
+      <g fill="#${statsTextColor}">
         <circle cx="80" cy="52" r="4" fill="#43A25A"/>
         <text x="87" y="57" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
-        <circle cx="${totalMembersStartX - 7}" cy="52" r="4" />
+        <circle cx="${totalMembersStartX - 7}" cy="52" r="4" fill="#BCC0C0" />
         <text x="${totalMembersStartX}" y="57" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <g>
-        <rect width="358" height="30" x="15" y="79" rx="6" ry="6" fill="#00863A" />
-        <text width="358" height="30" x="195" y="94" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#FFFFFF">${slicedButtonMessage}</text>
+        <rect width="358" height="30" x="15" y="79" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
+        <text width="358" height="30" x="195" y="94" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
       </g>
+    </svg>
+  `.trim()
+
+  return {
+    card,
+  }
+}
+
+interface MakeDefaultCardInput extends MakeCompactCardInput {
+  banner: string | null
+}
+
+export async function makeDefaultCard({
+  icon,
+  banner,
+  guildName,
+  onlineMembersCount,
+  membersCount,
+
+  textColor = 'FFFFFF',
+  backgroundColor = '141414',
+  borderRadius = 4,
+  statsTextColor = 'BCC0C0',
+
+  buttonColor = '00863A',
+  buttonText = 'Join',
+  buttonTextColor = 'FFFFFF',
+  buttonBorderRadius = 6,
+}: MakeDefaultCardInput) {
+  const slicedGuildName =
+    guildName.length > 23 ? `${guildName.slice(0, 23)}...` : guildName
+  const slicedButtonText =
+    buttonText.length > 40 ? `${buttonText.slice(0, 40)}...` : buttonText
+
+  const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
+  const formattedMembersCount = numberFormatter.format(membersCount)
+
+  const defaultPadding = 15
+  const onlineMembersCountText = `${formattedOnlineMembersCount} online`
+
+  const charWidth = 7
+  const totalOnlineMembersWidth = onlineMembersCountText.length * charWidth
+
+  const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
+
+  const card = `
+    <svg width="342" height="189" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
+      ${fontImport}
+      <defs>
+        <clipPath id="bannerClip">
+          <rect width="100%" height="60" x="0" y="0" rx="${borderRadius}" ry="${borderRadius}" />
+          <rect width="100%" height="30" x="0" y="30" />
+        </clipPath>
+        <clipPath id="iconClip">
+          <rect width="50" height="50" x="18" y="35" rx="10" ry="10" />
+        </clipPath>
+      </defs>
+      <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
+
+      <image width="100%" height="60" x="0" y="0" clip-path="url(#bannerClip)" preserveAspectRatio="xMidYMid slice" href="${banner}" />
+
+      <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#${backgroundColor}" />
+      <image width="50" height="50" x="18" y="35" clip-path="url(#iconClip)" href="${icon}" />
+
+      <text x="15" y="106" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
+      <g fill="#${statsTextColor}">
+        <circle cx="20" cy="121" r="4" fill="#43A25A"/>
+        <text x="27" y="126" letter-spacing="-0.5">${onlineMembersCountText}</text>
+
+        <circle cx="${totalMembersStartX - 7}" cy="121" r="4" fill="#BCC0C0" />
+        <text x="${totalMembersStartX}" y="126" letter-spacing="-0.5">${formattedMembersCount} members</text>
+      </g>
+
+      <rect width="312" height="30" x="15" y="145" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
+      <text width="312" height="30" x="171" y="160" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
     </svg>
   `.trim()
 

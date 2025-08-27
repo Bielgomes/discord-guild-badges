@@ -8,8 +8,20 @@ interface CreateCardInput {
   guildBannerUrl: string | null
   guildOnlineMemberCount: number
   guildMemberCount: number
-  buttonMessage: string | undefined
+
+  textColor: string | undefined
+  backgroundColor: string | undefined
+  borderRadius: number | undefined
+  statsTextColor: string | undefined
+
+  buttonColor: string | undefined
+  buttonText: string | undefined
+  buttonTextColor: string | undefined
+  buttonBorderRadius: number | undefined
 }
+
+const FALLBACK_ICON_URL = 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
+const FALLBACK_BANNER_URL = 'https://i.imgur.com/WcIB4vh.jpeg'
 
 export async function createCard({
   mode,
@@ -18,19 +30,35 @@ export async function createCard({
   guildBannerUrl,
   guildOnlineMemberCount,
   guildMemberCount,
-  buttonMessage,
+
+  textColor,
+  backgroundColor,
+  borderRadius,
+  statsTextColor,
+
+  buttonColor,
+  buttonText,
+  buttonTextColor,
+  buttonBorderRadius,
 }: CreateCardInput) {
-  const guildIconBase64 = await fetchImageAndTransformToBase64(
-    guildIconUrl || 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
+  const iconInBase64 = await fetchImageAndTransformToBase64(
+    guildIconUrl || FALLBACK_ICON_URL
   )
 
   if (mode === 'compact') {
     const { card } = await makeCompactCard({
-      iconUrl: guildIconBase64,
-      guildName: guildName,
+      icon: iconInBase64,
+      guildName,
       onlineMembersCount: guildOnlineMemberCount,
       membersCount: guildMemberCount,
-      buttonMessage,
+      textColor,
+      backgroundColor,
+      borderRadius,
+      statsTextColor,
+      buttonColor,
+      buttonText,
+      buttonTextColor,
+      buttonBorderRadius,
     })
 
     return {
@@ -38,17 +66,24 @@ export async function createCard({
     }
   }
 
-  const guildBannerBase64 = await fetchImageAndTransformToBase64(
-    guildBannerUrl || 'https://i.imgur.com/WcIB4vh.jpeg'
+  const bannerInBase64 = await fetchImageAndTransformToBase64(
+    guildBannerUrl || FALLBACK_BANNER_URL
   )
 
   const { card } = await makeDefaultCard({
-    iconUrl: guildIconBase64,
-    bannerUrl: guildBannerBase64,
-    guildName: guildName,
+    icon: iconInBase64,
+    banner: bannerInBase64,
+    guildName,
     onlineMembersCount: guildOnlineMemberCount,
     membersCount: guildMemberCount,
-    buttonMessage,
+    textColor,
+    backgroundColor,
+    borderRadius,
+    statsTextColor,
+    buttonColor,
+    buttonText,
+    buttonTextColor,
+    buttonBorderRadius,
   })
 
   return {

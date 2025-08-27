@@ -6,22 +6,44 @@ import { createCard } from '@/functions/create-card.ts'
 import { FetchImageError } from '@/functions/errors/fetch-image-error.ts'
 import { getOnlineMembersCount } from '@/utils/functions.ts'
 
+const colorSchema = z
+  .string()
+  .regex(/^[0-9a-f]{6}$/i)
+  .optional()
+
 export async function createCardRoute(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
   const createCardParamsSchema = z.object({
     guildId: z.string(),
-    buttonMessage: z.string().optional(),
   })
 
   const createCardQuerySchema = z.object({
     mode: z.enum(['default', 'compact']).default('default'),
-    buttonMessage: z.string().optional(),
+    textColor: colorSchema,
+    backgroundColor: colorSchema,
+    borderRadius: z.coerce.number().max(30).optional(),
+    statsTextColor: colorSchema,
+
+    buttonColor: colorSchema,
+    buttonText: z.string().optional(),
+    buttonTextColor: colorSchema,
+    buttonBorderRadius: z.coerce.number().max(15).optional(),
   })
 
   const { guildId } = createCardParamsSchema.parse(request.params)
-  const { mode, buttonMessage } = createCardQuerySchema.parse(request.query)
+  const {
+    mode,
+    textColor,
+    backgroundColor,
+    borderRadius,
+    statsTextColor,
+    buttonColor,
+    buttonText,
+    buttonTextColor,
+    buttonBorderRadius,
+  } = createCardQuerySchema.parse(request.query)
 
   try {
     const guild = await client.guilds.fetch(guildId)
@@ -34,7 +56,14 @@ export async function createCardRoute(
       guildBannerUrl: guild.bannerURL(),
       guildMemberCount: guild.memberCount,
       guildOnlineMemberCount,
-      buttonMessage,
+      textColor,
+      backgroundColor,
+      borderRadius,
+      statsTextColor,
+      buttonColor,
+      buttonText,
+      buttonTextColor,
+      buttonBorderRadius,
     })
 
     return reply.status(200).header('content-type', 'image/svg+xml').send(card)
