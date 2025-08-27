@@ -131,7 +131,7 @@ export async function makeDefaultCard({
   const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
 
   const card = `
-    <svg width="342" height="189" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
+    <svg width="342" height="194" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
         <clipPath id="bannerClip">
@@ -149,17 +149,17 @@ export async function makeDefaultCard({
       <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#${backgroundColor}" />
       <image width="50" height="50" x="18" y="35" clip-path="url(#iconClip)" href="${icon}" />
 
-      <text x="15" y="106" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
+      <text x="15" y="111" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#${statsTextColor}">
-        <circle cx="20" cy="121" r="4" fill="#43A25A"/>
-        <text x="27" y="126" letter-spacing="-0.5">${onlineMembersCountText}</text>
+        <circle cx="20" cy="126" r="4" fill="#43A25A"/>
+        <text x="27" y="131" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
-        <circle cx="${totalMembersStartX - 7}" cy="121" r="4" fill="#BCC0C0" />
-        <text x="${totalMembersStartX}" y="126" letter-spacing="-0.5">${formattedMembersCount} members</text>
+        <circle cx="${totalMembersStartX - 7}" cy="126" r="4" fill="#BCC0C0" />
+        <text x="${totalMembersStartX}" y="131" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
-      <rect width="312" height="30" x="15" y="145" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
-      <text width="312" height="30" x="171" y="160" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
+      <rect width="312" height="30" x="15" y="150" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
+      <text width="312" height="30" x="171" y="165" text-anchor="middle" dominant-baseline="middle" font-weight="600" font-size="14" letter-spacing="-0.5" word-spacing="1.2" fill="#${buttonTextColor}">${slicedButtonText}</text>
     </svg>
   `.trim()
 
