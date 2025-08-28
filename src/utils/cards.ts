@@ -21,6 +21,7 @@ interface MakeCompactCardInput {
   statsTextColor: string | undefined
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
+  iconBorderRadius: number | undefined
   borderRadius: number | undefined
 
   buttonColor: string | undefined
@@ -39,6 +40,7 @@ export async function makeCompactCard({
   statsTextColor = 'BCC0C0',
   backgroundColor = '141414',
   iconBorderColor,
+  iconBorderRadius = 10,
   borderRadius = 4,
 
   buttonColor = '00863A',
@@ -62,17 +64,19 @@ export async function makeCompactCard({
 
   const totalMembersStartX = defaultPadding + onlineMembersWidth + 92
 
+  const proportionalBorderRadius = iconBorderRadius * 1.08 // 54 / 50
+
   const card = `
     <svg width="388" height="121" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
       <defs>
         <clipPath id="iconClip">
-          <rect width="50" height="50" x="17" y="17" rx="10" ry="10" />
+          <rect width="50" height="50" x="17" y="17" rx="${iconBorderRadius}" ry="${iconBorderRadius}" />
         </clipPath>
       </defs>
       <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
 
-      <rect width="54" height="54" x="15" y="15" rx="11" ry="11" fill="#${iconBorderColor || backgroundColor}" />
+      <rect width="54" height="54" x="15" y="15" rx="${proportionalBorderRadius}" ry="${proportionalBorderRadius}" fill="#${iconBorderColor || backgroundColor}" />
       <image width="50" height="50" x="17" y="17" clip-path="url(#iconClip)" href="${icon}" />
 
       <text x="77" y="40" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
@@ -111,6 +115,7 @@ export async function makeDefaultCard({
   statsTextColor = 'BCC0C0',
   backgroundColor = '141414',
   iconBorderColor,
+  iconBorderRadius = 10,
   borderRadius = 4,
 
   buttonColor = '00863A',
@@ -134,6 +139,8 @@ export async function makeDefaultCard({
 
   const totalMembersStartX = defaultPadding + totalOnlineMembersWidth + 30
 
+  const proportionalBorderRadius = iconBorderRadius * 1.08 // 54 / 50
+
   const card = `
     <svg width="342" height="194" fill="#${backgroundColor}" xmlns="http://www.w3.org/2000/svg">
       ${fontImport}
@@ -143,14 +150,14 @@ export async function makeDefaultCard({
           <rect width="100%" height="30" x="0" y="30" />
         </clipPath>
         <clipPath id="iconClip">
-          <rect width="50" height="50" x="18" y="35" rx="10" ry="10" />
+          <rect width="50" height="50" x="18" y="35" rx="${iconBorderRadius}" ry="${iconBorderRadius}" />
         </clipPath>
       </defs>
       <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
 
       <image width="100%" height="60" x="0" y="0" clip-path="url(#bannerClip)" preserveAspectRatio="xMidYMid slice" href="${banner}" />
 
-      <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#${iconBorderColor || backgroundColor}" />
+      <rect width="54" height="54" x="16" y="33" rx="${proportionalBorderRadius}" ry="${proportionalBorderRadius}" fill="#${iconBorderColor || backgroundColor}" />
       <image width="50" height="50" x="18" y="35" clip-path="url(#iconClip)" href="${icon}" />
 
       <text x="15" y="111" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>

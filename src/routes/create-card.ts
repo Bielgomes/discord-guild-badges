@@ -26,6 +26,7 @@ export async function createCardRoute(
     statsTextColor: colorSchema,
     backgroundColor: colorSchema,
     iconBorderColor: colorSchema,
+    iconBorderRadius: z.coerce.number().max(25).optional(),
     borderRadius: z.coerce.number().max(30).optional(),
 
     buttonColor: colorSchema,
@@ -42,6 +43,7 @@ export async function createCardRoute(
     statsTextColor,
     backgroundColor,
     iconBorderColor,
+    iconBorderRadius,
     borderRadius,
 
     buttonColor,
@@ -67,6 +69,7 @@ export async function createCardRoute(
       statsTextColor,
       backgroundColor,
       iconBorderColor,
+      iconBorderRadius,
       borderRadius,
 
       buttonColor,

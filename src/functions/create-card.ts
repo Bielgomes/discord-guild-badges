@@ -14,6 +14,7 @@ interface CreateCardInput {
   statsTextColor: string | undefined
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
+  iconBorderRadius: number | undefined
   borderRadius: number | undefined
 
   buttonColor: string | undefined
@@ -38,6 +39,7 @@ export async function createCard({
   statsTextColor,
   backgroundColor,
   iconBorderColor,
+  iconBorderRadius,
   borderRadius,
 
   buttonColor,
@@ -60,6 +62,7 @@ export async function createCard({
       statsTextColor,
       backgroundColor,
       iconBorderColor,
+      iconBorderRadius,
       borderRadius,
 
       buttonColor,
@@ -88,6 +91,7 @@ export async function createCard({
     statsTextColor,
     backgroundColor,
     iconBorderColor,
+    iconBorderRadius,
     borderRadius,
 
     buttonColor,
