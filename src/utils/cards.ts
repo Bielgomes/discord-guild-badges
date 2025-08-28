@@ -18,9 +18,10 @@ interface MakeCompactCardInput {
   membersCount: number
 
   textColor: string | undefined
-  backgroundColor: string | undefined
-  borderRadius: number | undefined
   statsTextColor: string | undefined
+  backgroundColor: string | undefined
+  iconBorderColor: string | undefined
+  borderRadius: number | undefined
 
   buttonColor: string | undefined
   buttonText: string | undefined
@@ -35,9 +36,10 @@ export async function makeCompactCard({
   membersCount,
 
   textColor = 'FFFFFF',
-  backgroundColor = '141414',
-  borderRadius = 4,
   statsTextColor = 'BCC0C0',
+  backgroundColor = '141414',
+  iconBorderColor,
+  borderRadius = 4,
 
   buttonColor = '00863A',
   buttonText = 'Join',
@@ -70,7 +72,7 @@ export async function makeCompactCard({
       </defs>
       <rect width="100%" height="100%" rx="${borderRadius}" ry="${borderRadius}" />
 
-      <rect width="54" height="54" x="15" y="15" rx="11" ry="11" fill="#${backgroundColor}" />
+      <rect width="54" height="54" x="15" y="15" rx="11" ry="11" fill="#${iconBorderColor || backgroundColor}" />
       <image width="50" height="50" x="17" y="17" clip-path="url(#iconClip)" href="${icon}" />
 
       <text x="77" y="40" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
@@ -106,9 +108,10 @@ export async function makeDefaultCard({
   membersCount,
 
   textColor = 'FFFFFF',
-  backgroundColor = '141414',
-  borderRadius = 4,
   statsTextColor = 'BCC0C0',
+  backgroundColor = '141414',
+  iconBorderColor,
+  borderRadius = 4,
 
   buttonColor = '00863A',
   buttonText = 'Join',
@@ -147,7 +150,7 @@ export async function makeDefaultCard({
 
       <image width="100%" height="60" x="0" y="0" clip-path="url(#bannerClip)" preserveAspectRatio="xMidYMid slice" href="${banner}" />
 
-      <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#${backgroundColor}" />
+      <rect width="54" height="54" x="16" y="33" rx="11" ry="11" fill="#${iconBorderColor || backgroundColor}" />
       <image width="50" height="50" x="18" y="35" clip-path="url(#iconClip)" href="${icon}" />
 
       <text x="15" y="111" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>

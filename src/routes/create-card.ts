@@ -25,7 +25,7 @@ export async function createCardRoute(
     textColor: colorSchema,
     statsTextColor: colorSchema,
     backgroundColor: colorSchema,
-    borderColor: colorSchema,
+    iconBorderColor: colorSchema,
     borderRadius: z.coerce.number().max(30).optional(),
 
     buttonColor: colorSchema,
@@ -37,10 +37,13 @@ export async function createCardRoute(
   const { guildId } = createCardParamsSchema.parse(request.params)
   const {
     mode,
+
     textColor,
-    backgroundColor,
-    borderRadius,
     statsTextColor,
+    backgroundColor,
+    iconBorderColor,
+    borderRadius,
+
     buttonColor,
     buttonText,
     buttonTextColor,
@@ -53,15 +56,19 @@ export async function createCardRoute(
 
     const { card } = await createCard({
       mode,
+
       guildName: guild.name,
       guildIconUrl: guild.iconURL(),
       guildBannerUrl: guild.bannerURL(),
       guildMemberCount: guild.memberCount,
       guildOnlineMemberCount,
+
       textColor,
-      backgroundColor,
-      borderRadius,
       statsTextColor,
+      backgroundColor,
+      iconBorderColor,
+      borderRadius,
+
       buttonColor,
       buttonText,
       buttonTextColor,

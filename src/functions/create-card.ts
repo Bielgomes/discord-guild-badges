@@ -3,6 +3,7 @@ import { fetchImageAndTransformToBase64 } from '@/utils/functions.ts'
 
 interface CreateCardInput {
   mode: 'default' | 'compact'
+
   guildName: string
   guildIconUrl: string | null
   guildBannerUrl: string | null
@@ -10,9 +11,10 @@ interface CreateCardInput {
   guildMemberCount: number
 
   textColor: string | undefined
-  backgroundColor: string | undefined
-  borderRadius: number | undefined
   statsTextColor: string | undefined
+  backgroundColor: string | undefined
+  iconBorderColor: string | undefined
+  borderRadius: number | undefined
 
   buttonColor: string | undefined
   buttonText: string | undefined
@@ -25,6 +27,7 @@ const FALLBACK_BANNER_URL = 'https://i.imgur.com/WcIB4vh.jpeg'
 
 export async function createCard({
   mode,
+
   guildName,
   guildIconUrl,
   guildBannerUrl,
@@ -32,9 +35,10 @@ export async function createCard({
   guildMemberCount,
 
   textColor,
-  backgroundColor,
-  borderRadius,
   statsTextColor,
+  backgroundColor,
+  iconBorderColor,
+  borderRadius,
 
   buttonColor,
   buttonText,
@@ -51,10 +55,13 @@ export async function createCard({
       guildName,
       onlineMembersCount: guildOnlineMemberCount,
       membersCount: guildMemberCount,
+
       textColor,
-      backgroundColor,
-      borderRadius,
       statsTextColor,
+      backgroundColor,
+      iconBorderColor,
+      borderRadius,
+
       buttonColor,
       buttonText,
       buttonTextColor,
@@ -76,10 +83,13 @@ export async function createCard({
     guildName,
     onlineMembersCount: guildOnlineMemberCount,
     membersCount: guildMemberCount,
+
     textColor,
-    backgroundColor,
-    borderRadius,
     statsTextColor,
+    backgroundColor,
+    iconBorderColor,
+    borderRadius,
+
     buttonColor,
     buttonText,
     buttonTextColor,
