@@ -22,3 +22,12 @@ export async function fetchImageAndTransformToBase64(url: string) {
 
   return imageBase64
 }
+
+export function sanitizeString(str: string) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}

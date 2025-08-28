@@ -23,16 +23,20 @@ export async function createCardRoute(
     mode: z.enum(['default', 'compact']).default('default'),
 
     textColor: colorSchema,
+    maxTextLen: z.coerce.number().min(0).max(50).optional(),
+    textEllipses: z.string().max(5).optional(),
     statsTextColor: colorSchema,
     backgroundColor: colorSchema,
     iconBorderColor: colorSchema,
-    iconBorderRadius: z.coerce.number().max(25).optional(),
-    borderRadius: z.coerce.number().max(30).optional(),
+    iconBorderRadius: z.coerce.number().min(0).max(25).optional(),
+    borderRadius: z.coerce.number().min(0).max(30).optional(),
 
     buttonColor: colorSchema,
     buttonText: z.string().optional(),
+    maxButtonTextLen: z.coerce.number().min(0).max(100).optional(),
+    buttonTextEllipses: z.string().max(5).optional(),
     buttonTextColor: colorSchema,
-    buttonBorderRadius: z.coerce.number().max(15).optional(),
+    buttonBorderRadius: z.coerce.number().min(0).max(15).optional(),
   })
 
   const { guildId } = createCardParamsSchema.parse(request.params)
@@ -40,6 +44,8 @@ export async function createCardRoute(
     mode,
 
     textColor,
+    maxTextLen,
+    textEllipses,
     statsTextColor,
     backgroundColor,
     iconBorderColor,
@@ -48,6 +54,8 @@ export async function createCardRoute(
 
     buttonColor,
     buttonText,
+    maxButtonTextLen,
+    buttonTextEllipses,
     buttonTextColor,
     buttonBorderRadius,
   } = createCardQuerySchema.parse(request.query)
@@ -66,6 +74,8 @@ export async function createCardRoute(
       guildOnlineMemberCount,
 
       textColor,
+      maxTextLen,
+      textEllipses,
       statsTextColor,
       backgroundColor,
       iconBorderColor,
@@ -74,6 +84,8 @@ export async function createCardRoute(
 
       buttonColor,
       buttonText,
+      maxButtonTextLen,
+      buttonTextEllipses,
       buttonTextColor,
       buttonBorderRadius,
     })

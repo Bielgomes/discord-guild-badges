@@ -1,4 +1,5 @@
 import { numberFormatter } from './formatters.ts'
+import { sanitizeString } from './functions.ts'
 
 const fontImport = `
   <defs>
@@ -18,6 +19,8 @@ interface MakeCompactCardInput {
   membersCount: number
 
   textColor: string | undefined
+  maxTextLen: number | undefined
+  textEllipses: string | undefined
   statsTextColor: string | undefined
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
@@ -26,6 +29,8 @@ interface MakeCompactCardInput {
 
   buttonColor: string | undefined
   buttonText: string | undefined
+  maxButtonTextLen: number | undefined
+  buttonTextEllipses: string | undefined
   buttonTextColor: string | undefined
   buttonBorderRadius: number | undefined
 }
@@ -37,6 +42,8 @@ export async function makeCompactCard({
   membersCount,
 
   textColor = 'FFFFFF',
+  maxTextLen = 25,
+  textEllipses = '...',
   statsTextColor = 'BCC0C0',
   backgroundColor = '141414',
   iconBorderColor,
@@ -45,13 +52,23 @@ export async function makeCompactCard({
 
   buttonColor = '00863A',
   buttonText = 'Join',
+  maxButtonTextLen = 50,
+  buttonTextEllipses = '...',
   buttonTextColor = 'FFFFFF',
   buttonBorderRadius = 6,
 }: MakeCompactCardInput) {
+  const sanitizedButtonText = sanitizeString(buttonText)
+  const sanitizedTextEllipses = sanitizeString(textEllipses)
+  const sanitizedButtonTextEllipses = sanitizeString(buttonTextEllipses)
+
   const slicedGuildName =
-    guildName.length > 22 ? `${guildName.slice(0, 22)}...` : guildName
+    guildName.length > maxTextLen
+      ? `${guildName.slice(0, maxTextLen)}${sanitizedTextEllipses}`
+      : guildName
   const slicedButtonText =
-    buttonText.length > 47 ? `${buttonText.slice(0, 47)}...` : buttonText
+    sanitizedButtonText.length > maxButtonTextLen
+      ? `${sanitizedButtonText.slice(0, maxButtonTextLen)}${sanitizedButtonTextEllipses}`
+      : sanitizedButtonText
 
   const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
   const formattedMembersCount = numberFormatter.format(membersCount)
@@ -112,6 +129,8 @@ export async function makeDefaultCard({
   membersCount,
 
   textColor = 'FFFFFF',
+  maxTextLen = 25,
+  textEllipses = '...',
   statsTextColor = 'BCC0C0',
   backgroundColor = '141414',
   iconBorderColor,
@@ -120,13 +139,23 @@ export async function makeDefaultCard({
 
   buttonColor = '00863A',
   buttonText = 'Join',
+  maxButtonTextLen = 40,
+  buttonTextEllipses = '...',
   buttonTextColor = 'FFFFFF',
   buttonBorderRadius = 6,
 }: MakeDefaultCardInput) {
+  const sanitizedButtonText = sanitizeString(buttonText)
+  const sanitizedTextEllipses = sanitizeString(textEllipses)
+  const sanitizedButtonTextEllipses = sanitizeString(buttonTextEllipses)
+
   const slicedGuildName =
-    guildName.length > 23 ? `${guildName.slice(0, 23)}...` : guildName
+    guildName.length > maxTextLen
+      ? `${guildName.slice(0, maxTextLen)}${sanitizedTextEllipses}`
+      : guildName
   const slicedButtonText =
-    buttonText.length > 40 ? `${buttonText.slice(0, 40)}...` : buttonText
+    sanitizedButtonText.length > maxButtonTextLen
+      ? `${sanitizedButtonText.slice(0, maxButtonTextLen)}${sanitizedButtonTextEllipses}`
+      : sanitizedButtonText
 
   const formattedOnlineMembersCount = numberFormatter.format(onlineMembersCount)
   const formattedMembersCount = numberFormatter.format(membersCount)

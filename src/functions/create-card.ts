@@ -11,6 +11,8 @@ interface CreateCardInput {
   guildMemberCount: number
 
   textColor: string | undefined
+  maxTextLen: number | undefined
+  textEllipses: string | undefined
   statsTextColor: string | undefined
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
@@ -19,6 +21,8 @@ interface CreateCardInput {
 
   buttonColor: string | undefined
   buttonText: string | undefined
+  maxButtonTextLen: number | undefined
+  buttonTextEllipses: string | undefined
   buttonTextColor: string | undefined
   buttonBorderRadius: number | undefined
 }
@@ -36,6 +40,8 @@ export async function createCard({
   guildMemberCount,
 
   textColor,
+  maxTextLen,
+  textEllipses,
   statsTextColor,
   backgroundColor,
   iconBorderColor,
@@ -44,6 +50,8 @@ export async function createCard({
 
   buttonColor,
   buttonText,
+  maxButtonTextLen,
+  buttonTextEllipses,
   buttonTextColor,
   buttonBorderRadius,
 }: CreateCardInput) {
@@ -59,6 +67,8 @@ export async function createCard({
       membersCount: guildMemberCount,
 
       textColor,
+      maxTextLen,
+      textEllipses,
       statsTextColor,
       backgroundColor,
       iconBorderColor,
@@ -67,6 +77,8 @@ export async function createCard({
 
       buttonColor,
       buttonText,
+      maxButtonTextLen,
+      buttonTextEllipses,
       buttonTextColor,
       buttonBorderRadius,
     })
@@ -88,6 +100,8 @@ export async function createCard({
     membersCount: guildMemberCount,
 
     textColor,
+    maxTextLen,
+    textEllipses,
     statsTextColor,
     backgroundColor,
     iconBorderColor,
@@ -96,6 +110,8 @@ export async function createCard({
 
     buttonColor,
     buttonText,
+    maxButtonTextLen,
+    buttonTextEllipses,
     buttonTextColor,
     buttonBorderRadius,
   })
