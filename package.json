@@ -5,11 +5,11 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsup src --out-dir build",
-    "start": "node build/server.cjs",
+    "build": "tsup src --out-dir dist",
+    "start": "node dist/server.cjs",
     "start:dev": "tsx watch src/server.ts",
     "lint": "biome check",
-    "lint:fix": " biome check --write"
+    "lint:fix": "biome check --write"
   },
   "keywords": [],
   "author": "Bielgomes",

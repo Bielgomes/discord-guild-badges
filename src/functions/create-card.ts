@@ -28,7 +28,7 @@ interface CreateCardInput {
 }
 
 const FALLBACK_ICON_URL = 'https://cdn3.emoji.gg/emojis/4789-discord-icon.png'
-const FALLBACK_BANNER_URL = 'https://i.imgur.com/WcIB4vh.jpeg'
+const FALLBACK_BANNER_URL = 'https://i.ibb.co/vCC3LDLS/WcIB4vh.jpg'
 
 export async function createCard({
   mode,
