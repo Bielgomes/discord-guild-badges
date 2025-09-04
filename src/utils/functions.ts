@@ -1,3 +1,5 @@
+// src/utils/functions.ts
+
 import type { Guild } from 'discord.js'
 import { FetchImageError } from '@/functions/errors/fetch-image-error.ts'
 
@@ -17,8 +19,12 @@ export async function fetchImageAndTransformToBase64(url: string) {
     throw new FetchImageError()
   }
 
+  const contentType = response.headers.get('content-type')
+
   const arrayBuffer = await response.arrayBuffer()
-  const imageBase64 = `data:image/svg+xml;base64,${Buffer.from(arrayBuffer).toString('base64')}`
+  const imageBase64 = `data:${contentType};base64,${Buffer.from(
+    arrayBuffer,
+  ).toString('base64')}`
 
   return imageBase64
 }
