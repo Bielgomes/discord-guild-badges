@@ -1,5 +1,6 @@
 import { DiscordAPIError } from 'discord.js'
 import type { FastifyReply, FastifyRequest } from 'fastify'
+import sharp from 'sharp'
 import z from 'zod'
 import { client } from '@/client.ts'
 import { createCard } from '@/functions/create-card.ts'
@@ -21,6 +22,7 @@ export async function createCardRoute(
 
   const createCardQuerySchema = z.object({
     mode: z.enum(['default', 'compact']).default('default'),
+    format: z.enum(['png']).optional(),
 
     textColor: colorSchema,
     maxTextLen: z.coerce.number().min(0).max(50).optional(),
@@ -42,6 +44,7 @@ export async function createCardRoute(
   const { guildId } = createCardParamsSchema.parse(request.params)
   const {
     mode,
+    format,
 
     textColor,
     maxTextLen,
@@ -68,7 +71,7 @@ export async function createCardRoute(
       mode,
 
       guildName: guild.name,
-      guildIconUrl: guild.iconURL(),
+      guildIconUrl: guild.iconURL({ extension: 'png' }),
       guildBannerUrl: guild.bannerURL(),
       guildMemberCount: guild.memberCount,
       guildOnlineMemberCount,
@@ -89,6 +92,14 @@ export async function createCardRoute(
       buttonTextColor,
       buttonBorderRadius,
     })
+
+    if (format === 'png') {
+      const pngBuffer = await sharp(Buffer.from(card)).png().toBuffer()
+      return reply
+        .status(200)
+        .header('content-type', 'image/png')
+        .send(pngBuffer)
+    }
 
     return reply.status(200).header('content-type', 'image/svg+xml').send(card)
   } catch (err) {

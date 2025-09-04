@@ -99,10 +99,10 @@ export async function makeCompactCard({
       <text x="77" y="40" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#${statsTextColor}">
         <circle cx="82" cy="54" r="4" fill="#43A25A"/>
-        <text x="89" y="59" letter-spacing="-0.5">${onlineMembersCountText}</text>
+        <text x="89" y="59" font-size="14" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
         <circle cx="${totalMembersStartX - 7}" cy="54" r="4" fill="#BCC0C0" />
-        <text x="${totalMembersStartX}" y="59" letter-spacing="-0.5">${formattedMembersCount} members</text>
+        <text x="${totalMembersStartX}" y="59" font-size="14" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <g>
@@ -192,10 +192,10 @@ export async function makeDefaultCard({
       <text x="15" y="111" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
       <g fill="#${statsTextColor}">
         <circle cx="20" cy="126" r="4" fill="#43A25A"/>
-        <text x="27" y="131" letter-spacing="-0.5">${onlineMembersCountText}</text>
+        <text x="27" y="131" font-size="14" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
         <circle cx="${totalMembersStartX - 7}" cy="126" r="4" fill="#BCC0C0" />
-        <text x="${totalMembersStartX}" y="131" letter-spacing="-0.5">${formattedMembersCount} members</text>
+        <text x="${totalMembersStartX}" y="131" font-size="14" letter-spacing="-0.5">${formattedMembersCount} members</text>
       </g>
 
       <rect width="312" height="30" x="15" y="150" rx="${buttonBorderRadius}" ry="${buttonBorderRadius}" fill="#${buttonColor}" />
