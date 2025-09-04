@@ -24,7 +24,7 @@ Embedding card in GitHub Markdown:
 
 #### Compact mode Card
 
-[![compact mode card](https://guild-cards.discloud.app/api/743482187365613641)](https://discord.gg/4hsS5V3Bgc?mode=compact)
+[![compact mode card](https://guild-cards.discloud.app/api/743482187365613641?mode=compact)](https://discord.gg/4hsS5V3Bgc)
 
 #### Default mode Card with some customizations
 
