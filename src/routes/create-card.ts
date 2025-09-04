@@ -1,7 +1,7 @@
 import { DiscordAPIError } from 'discord.js'
 import type { FastifyReply, FastifyRequest } from 'fastify'
-import z from 'zod'
 import sharp from 'sharp'
+import z from 'zod'
 import { client } from '@/client.ts'
 import { createCard } from '@/functions/create-card.ts'
 import { FetchImageError } from '@/functions/errors/fetch-image-error.ts'
@@ -95,7 +95,10 @@ export async function createCardRoute(
 
     if (format === 'png') {
       const pngBuffer = await sharp(Buffer.from(card)).png().toBuffer()
-      return reply.status(200).header('content-type', 'image/png').send(pngBuffer)
+      return reply
+        .status(200)
+        .header('content-type', 'image/png')
+        .send(pngBuffer)
     }
 
     return reply.status(200).header('content-type', 'image/svg+xml').send(card)

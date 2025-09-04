@@ -23,7 +23,7 @@ export async function fetchImageAndTransformToBase64(url: string) {
 
   const arrayBuffer = await response.arrayBuffer()
   const imageBase64 = `data:${contentType};base64,${Buffer.from(
-    arrayBuffer,
+    arrayBuffer
   ).toString('base64')}`
 
   return imageBase64
