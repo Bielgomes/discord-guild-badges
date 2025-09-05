@@ -109,7 +109,10 @@ export async function createCardRoute(
         .send({ message: 'Failed to fetch or process guild image' })
     }
 
-    if (err instanceof DiscordAPIError && err.code === 10004) {
+    if (
+      err instanceof DiscordAPIError &&
+      (err.code === 10004 || err.code === 50035)
+    ) {
       return reply.status(400).send({ message: 'Guild not found' })
     }
 
