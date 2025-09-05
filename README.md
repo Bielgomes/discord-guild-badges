@@ -38,7 +38,7 @@ Embedding card in GitHub Markdown:
 
 | Parameter            | Default Value     | Min - Max            | Description                                                   |
 | -------------------- | ----------------- | -------------------- | ------------------------------------------------------------- |
-| `mode`               | `default`         | `default | compact`  | Defines the card display type                                 |
+| `mode`               | `default`         | `default-compact`  | Defines the card display type                                 |
 | `format`             |                   | `png`                | Define card extension                                         |
 | `textColor`          | `FFFFFF`          | `6`                  | Hex color of the server name text                             |
 | `maxTextLen`         | `25`              | `0-50`               | Maximum length of the server name before ellipses are applied |
