@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/build"]
+    "includes": ["**", "!**/build", "!.vscode"]
   },
   "formatter": {
     "enabled": true,
