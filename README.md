@@ -59,7 +59,7 @@ Embedding card in GitHub Markdown:
 
 Feel free to open an issue or submit a pull request 😁
 
-## Contribuidores
+## Contributors
 
 <a href="https://github.com/bielgomes/discord-guild-cards/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=bielgomes/discord-guild-cards" />
