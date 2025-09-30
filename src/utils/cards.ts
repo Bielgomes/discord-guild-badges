@@ -16,7 +16,10 @@ const fontImport = `
 `
 
 interface RenderStatsInput {
-  statsTextColor: string
+  onlineMembersTextColor: string
+  membersTextColor: string
+  onlineMembersDotColor: string
+  membersDotColor: string
 
   onlineMembersX: number
   onlineMembersY: number
@@ -29,7 +32,10 @@ interface RenderStatsInput {
 }
 
 function renderStats({
-  statsTextColor,
+  onlineMembersTextColor,
+  membersTextColor,
+  onlineMembersDotColor,
+  membersDotColor,
 
   onlineMembersX,
   onlineMembersY,
@@ -41,12 +47,12 @@ function renderStats({
   membersCountText,
 }: RenderStatsInput) {
   return `
-    <g fill="#${statsTextColor}">
-      <circle cx="${onlineMembersX}" cy="${onlineMembersY}" r="4" fill="#43A25A"/>
-      <text x="${onlineMembersX + 7}" y="${onlineMembersY + 5}" font-size="14" letter-spacing="-0.5">${onlineMembersCountText}</text>
+    <g>
+      <circle cx="${onlineMembersX}" cy="${onlineMembersY}" r="4" fill="#${onlineMembersDotColor}"/>
+      <text fill="#${onlineMembersTextColor}" x="${onlineMembersX + 7}" y="${onlineMembersY + 5}" font-size="14" letter-spacing="-0.5">${onlineMembersCountText}</text>
 
-      <circle cx="${membersX - 7}" cy="${membersY}" r="4" fill="#BCC0C0" />
-      <text x="${membersX}" y="${membersY + 5}" font-size="14" letter-spacing="-0.5">${membersCountText}</text>
+      <circle cx="${membersX - 7}" cy="${membersY}" r="4" fill="#${membersDotColor}" />
+      <text fill="#${membersTextColor}" x="${membersX}" y="${membersY + 5}" font-size="14" letter-spacing="-0.5">${membersCountText}</text>
     </g>
   `
 }
@@ -146,7 +152,12 @@ interface MakeCompactCardInput {
   textColor: string | undefined
   maxTextLen: number | undefined
   textEllipses: string | undefined
-  statsTextColor: string | undefined
+
+  onlineMembersTextColor: string | undefined
+  membersTextColor: string | undefined
+  onlineMembersDotColor: string | undefined
+  membersDotColor: string | undefined
+
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
   iconBorderRadius: number | undefined
@@ -169,7 +180,12 @@ export async function makeCompactCard({
   textColor = 'FFFFFF',
   maxTextLen = 25,
   textEllipses = '...',
-  statsTextColor = 'BCC0C0',
+
+  onlineMembersTextColor = 'BCC0C0',
+  membersTextColor = 'BCC0C0',
+  onlineMembersDotColor = '43A25A',
+  membersDotColor = 'BCC0C0',
+
   backgroundColor = '141414',
   iconBorderColor,
   iconBorderRadius = 10,
@@ -220,7 +236,10 @@ export async function makeCompactCard({
       <text x="77" y="40" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
 
       ${renderStats({
-        statsTextColor,
+        onlineMembersTextColor,
+        membersTextColor,
+        onlineMembersDotColor,
+        membersDotColor,
         onlineMembersX: 82,
         onlineMembersY: 55,
         membersX: totalMembersStartX,
@@ -228,7 +247,6 @@ export async function makeCompactCard({
         onlineMembersCountText,
         membersCountText,
       })}
-
       ${renderButton({
         buttonWidth: 358,
         buttonColor,
@@ -261,7 +279,12 @@ export async function makeDefaultCard({
   textColor = 'FFFFFF',
   maxTextLen = 25,
   textEllipses = '...',
-  statsTextColor = 'BCC0C0',
+
+  onlineMembersTextColor = 'BCC0C0',
+  membersTextColor = 'BCC0C0',
+  onlineMembersDotColor = '43A25A',
+  membersDotColor = 'BCC0C0',
+
   backgroundColor = '141414',
   iconBorderColor,
   iconBorderRadius = 10,
@@ -318,7 +341,10 @@ export async function makeDefaultCard({
       <text x="15" y="111" font-weight="bold" font-size="20" fill="#${textColor}" letter-spacing="-0.5">${slicedGuildName}</text>
 
       ${renderStats({
-        statsTextColor,
+        onlineMembersTextColor,
+        membersTextColor,
+        onlineMembersDotColor,
+        membersDotColor,
         onlineMembersX: 20,
         onlineMembersY: 126,
         membersX: totalMembersStartX,
@@ -326,7 +352,6 @@ export async function makeDefaultCard({
         onlineMembersCountText,
         membersCountText,
       })}
-
       ${renderButton({
         buttonWidth: 312,
         buttonColor,

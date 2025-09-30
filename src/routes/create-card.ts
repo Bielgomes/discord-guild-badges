@@ -27,7 +27,12 @@ export async function createCardRoute(
     textColor: colorSchema,
     maxTextLen: z.coerce.number().min(0).max(50).optional(),
     textEllipses: z.string().max(5).optional(),
-    statsTextColor: colorSchema,
+
+    onlineMembersTextColor: colorSchema,
+    membersTextColor: colorSchema,
+    onlineMembersDotColor: colorSchema,
+    membersDotColor: colorSchema,
+
     backgroundColor: colorSchema,
     iconBorderColor: colorSchema,
     iconBorderRadius: z.coerce.number().min(0).max(25).optional(),
@@ -49,7 +54,12 @@ export async function createCardRoute(
     textColor,
     maxTextLen,
     textEllipses,
-    statsTextColor,
+
+    onlineMembersTextColor,
+    membersTextColor,
+    onlineMembersDotColor,
+    membersDotColor,
+
     backgroundColor,
     iconBorderColor,
     iconBorderRadius,
@@ -79,7 +89,12 @@ export async function createCardRoute(
       textColor,
       maxTextLen,
       textEllipses,
-      statsTextColor,
+
+      onlineMembersTextColor,
+      membersTextColor,
+      onlineMembersDotColor,
+      membersDotColor,
+
       backgroundColor,
       iconBorderColor,
       iconBorderRadius,
