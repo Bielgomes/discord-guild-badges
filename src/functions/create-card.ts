@@ -13,7 +13,12 @@ interface CreateCardInput {
   textColor: string | undefined
   maxTextLen: number | undefined
   textEllipses: string | undefined
-  statsTextColor: string | undefined
+
+  onlineMembersTextColor: string | undefined
+  membersTextColor: string | undefined
+  onlineMembersDotColor: string | undefined
+  membersDotColor: string | undefined
+
   backgroundColor: string | undefined
   iconBorderColor: string | undefined
   iconBorderRadius: number | undefined
@@ -42,7 +47,12 @@ export async function createCard({
   textColor,
   maxTextLen,
   textEllipses,
-  statsTextColor,
+
+  onlineMembersTextColor,
+  membersTextColor,
+  onlineMembersDotColor,
+  membersDotColor,
+
   backgroundColor,
   iconBorderColor,
   iconBorderRadius,
@@ -69,7 +79,12 @@ export async function createCard({
       textColor,
       maxTextLen,
       textEllipses,
-      statsTextColor,
+
+      onlineMembersTextColor,
+      membersTextColor,
+      onlineMembersDotColor,
+      membersDotColor,
+
       backgroundColor,
       iconBorderColor,
       iconBorderRadius,
@@ -102,7 +117,12 @@ export async function createCard({
     textColor,
     maxTextLen,
     textEllipses,
-    statsTextColor,
+
+    onlineMembersTextColor,
+    membersTextColor,
+    onlineMembersDotColor,
+    membersDotColor,
+
     backgroundColor,
     iconBorderColor,
     iconBorderRadius,
