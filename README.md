@@ -32,7 +32,7 @@ Embedding card in GitHub Markdown:
 
 #### Default mode Card with some customizations
 
-[![custom default mode card](https://guild-cards.discloud.app/api/743482187365613641?backgroundColor=DDDDDD&textColor=000000&onlineMembersTextColor=101010&membersTextColor=101010&membersDotColor=000000&borderRadius=0&buttonBorderRadius=0&buttonColor=000000)](https://discord.gg/4hsS5V3Bgc)
+[![custom default mode card](https://guild-cards.discloud.app/api/743482187365613641?backgroundColor=DDDDDD&textColor=000000&onlineMembersTextColor=101010&membersTextColor=101010&membersDotColor=000000&borderRadius=0&buttonBorderRadius=0&buttonColor=000000&t=0)](https://discord.gg/4hsS5V3Bgc)
 
 ## Parameters
 
